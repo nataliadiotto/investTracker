@@ -1,10 +1,13 @@
 package br.com.investTracker.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "investments")
 public class Investment {
@@ -16,4 +19,10 @@ public class Investment {
     private BigDecimal buyingPrice;
     private BigDecimal sellingPrice;
 
+    public Investment(String ticker, Integer quantity, BigDecimal buyingPrice, BigDecimal sellingPrice) {
+        this.ticker = ticker;
+        this.quantity = quantity;
+        this.buyingPrice = buyingPrice;
+        this.sellingPrice = sellingPrice;
+    }
 }
