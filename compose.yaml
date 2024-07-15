@@ -1,16 +1,26 @@
 version: '3.8'
+
 services:
   db:
     image: postgres:13
+    container_name: investTrack_db
     environment:
       POSTGRES_DB: invest_db
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     ports:
       - "5434:5432"
+    networks:
+      - investTrack_network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "admin"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
 
   app:
     image: invest-tracker:2.0
+    container_name: investTrack_app
     ports:
       - "8085:8085"
     environment:
@@ -18,5 +28,13 @@ services:
       SPRING_DATASOURCE_USERNAME: admin
       SPRING_DATASOURCE_PASSWORD: admin
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - investTrack_network
+
+networks:
+  investTrack_network:
+    driver: bridge
+
 

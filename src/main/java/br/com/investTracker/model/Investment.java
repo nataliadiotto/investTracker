@@ -25,4 +25,7 @@ public class Investment {
         this.buyingPrice = buyingPrice;
         this.sellingPrice = sellingPrice;
     }
+
+    public Investment() {
+    }
 }
