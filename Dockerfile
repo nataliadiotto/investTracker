@@ -24,7 +24,7 @@ COPY --from=build /app/target/*.jar /app/app.jar
 WORKDIR /app
 
 # Expor a porta que a aplicação usará
-EXPOSE 8085
+EXPOSE 8080
 
 # Comando para executar a aplicação
 CMD ["java", "-jar", "app.jar"]
