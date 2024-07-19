@@ -1,6 +1,7 @@
 package br.com.investTracker.service;
 
 import br.com.investTracker.dto.InvestmentDTO;
+import br.com.investTracker.errors.ResourceNotFoundException;
 import br.com.investTracker.model.Investment;
 import br.com.investTracker.repository.InvestmentRepository;
 import org.modelmapper.ModelMapper;
@@ -69,5 +70,14 @@ public class InvestmentServiceImpl implements InvestmentService {
     @Override
     public BigDecimal investmentVariation(Long id) {
         return null;
+    }
+
+    @Override
+    public List<Investment> filterByTicker(String ticker) {
+        List<Investment> investmentList = investmentRepository.findByTicker(ticker);
+        if (investmentList.isEmpty()) {
+            throw new ResourceNotFoundException("investment by ticker");
+        }
+        return investmentList;
     }
 }

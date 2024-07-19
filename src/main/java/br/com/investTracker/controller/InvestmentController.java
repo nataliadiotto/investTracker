@@ -49,4 +49,10 @@ public class InvestmentController {
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
+
+    @GetMapping(value = "/investment", params = {"ticker"})
+    public ResponseEntity<List<Investment>> filterByTicker(@RequestParam String ticker) {
+        return ResponseEntity.status(HttpStatus.OK).body(investmentService.filterByTicker(ticker));
+    }
+
 }

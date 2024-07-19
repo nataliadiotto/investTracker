@@ -18,6 +18,8 @@ public interface InvestmentService {
 
     BigDecimal investmentVariation(Long id);
 
+    List<Investment> filterByTicker(String ticker);
+
     //List<Investment> filterByName(???)
 
 }
